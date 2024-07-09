@@ -1,0 +1,33 @@
+[
+ {
+  "absolute_value": 0,
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 1,
+  "default_print_language": "en",
+  "disabled": 0,
+  "doc_type": "Sopos Production Order",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": null,
+  "font_size": 0,
+  "format_data": null,
+  "html": "<style>\n\t.print-format table, .print-format tr, \n\t.print-format td, .print-format div, .print-format p {\n\t\tline-height: 150%;\n\t\tvertical-align: middle;\n\t}\n\t@media screen {\n\t\t.print-format {\n\t\t\twidth: 4in;\n\t\t\tpadding: 0.25in;\n\t\t\tmin-height: 8in;\n\t\t}\n\t}\n</style>\n\n{% if letter_head %}\n    {{ letter_head }}\n{% endif %}\n\n<p class=\"text-center\" style=\"margin-bottom: 1rem\">\n\t{{ doc.company }}<br>\n\t<b>{{ doc.area }}</b><br>\n</p>\n<p>\n\t<b>{{ _(\"Table\") }}:</b> {{ doc.table }}  {{ doc.floor }}<br>\n\t<b>{{ _(\"Cashier\") }}:</b> {{ doc.owner }}<br>\n\t<b>{{ _(\"Customer\") }}:</b> {{ doc.customer }}<br>\n\t<b>{{ _(\"Order no\") }}:</b> {{ doc.order_no }}<br>\n\t<b>{{ _(\"Date\") }}:</b> {{  doc.get_formatted(\"creation\") }}<br>\n</p>\n\n<hr>\n<table class=\"table table-condensed\">\n\t<thead>\n\t\t<tr>\n\t\t\t<th width=\"50%\">{{ _(\"Item\") }}</th>\n\t\t\t<th width=\"25%\" class=\"text-right\">{{ _(\"Qty\") }}</th>\n\t\t</tr>\n\t</thead>\n\t<tbody>\n\t\t{%- for item in doc.items -%}\n\t\t<tr>\n\t\t\t<td>\n\t\t\t\t{{ item.item_code }}\n\t\t\t</td>\n\t\t\t<td class=\"text-right\">{{ item.quantity }}</td>\n\t\t</tr>\n\t\t{%- endfor -%}\n\t</tbody>\n</table>\n<hr>\n<p>{{ doc.terms or \"\" }}</p>\n<p class=\"text-center\">{{ _(\"Order posted successifuly.\") }}</p>",
+  "line_breaks": 0,
+  "margin_bottom": 0.0,
+  "margin_left": 0.0,
+  "margin_right": 0.0,
+  "margin_top": 0.0,
+  "modified": "2024-03-18 23:31:22.223241",
+  "module": "Sopos",
+  "name": "Production Center",
+  "page_number": "Hide",
+  "print_format_builder": 0,
+  "print_format_builder_beta": 0,
+  "print_format_type": "Jinja",
+  "raw_commands": null,
+  "raw_printing": 0,
+  "show_section_headings": 0,
+  "standard": "No"
+ }
+]

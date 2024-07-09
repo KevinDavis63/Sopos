@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-18 07:45:27.554791",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "column_break_ttaq",
+  "quantity",
+  "column_break_rftg",
+  "price",
+  "column_break_xcrl",
+  "uom",
+  "section_break_dfwk",
+  "tax_rate",
+  "column_break_alpq",
+  "customer_note",
+  "column_break_zwjf",
+  "internal_note",
+  "section_break_fcms",
+  "status",
+  "cancellation_section",
+  "cancelled_by",
+  "column_break_ppcm",
+  "cancel_date",
+  "column_break_zasn",
+  "approved_cancel_by"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_ttaq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "column_break_rftg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Price"
+  },
+  {
+   "fieldname": "section_break_dfwk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tax_rate",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tax"
+  },
+  {
+   "fieldname": "column_break_alpq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_note",
+   "fieldtype": "Data",
+   "label": "Customer note"
+  },
+  {
+   "fieldname": "column_break_zwjf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "internal_note",
+   "fieldtype": "Data",
+   "label": "Internal note"
+  },
+  {
+   "fieldname": "section_break_fcms",
+   "fieldtype": "Section Break",
+   "label": "State"
+  },
+  {
+   "fieldname": "column_break_xcrl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Uom",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cancellation_section",
+   "fieldtype": "Section Break",
+   "label": "Cancellation"
+  },
+  {
+   "fieldname": "cancelled_by",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Cancelled by",
+   "options": "User"
+  },
+  {
+   "fieldname": "column_break_ppcm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cancel_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Cancel Date"
+  },
+  {
+   "fieldname": "column_break_zasn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_cancel_by",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Approved cancel by",
+   "options": "User"
+  },
+  {
+   "default": "Saved",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Saved\nPaid\nCancelled"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-04-14 09:31:45.762802",
+ "modified_by": "Administrator",
+ "module": "Sopos",
+ "name": "Sopos Table Order Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

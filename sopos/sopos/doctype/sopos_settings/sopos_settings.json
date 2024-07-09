@@ -1,0 +1,143 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-20 00:10:40.608182",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "oauth_client_id",
+  "column_break_moxb",
+  "waiter_role",
+  "column_break_fdld",
+  "default_customer",
+  "column_break_htif",
+  "change_approval_role",
+  "section_break_cwlv",
+  "tax_account",
+  "column_break_ejon",
+  "qr_code_domain",
+  "section_break_dwqy",
+  "default_payment_method",
+  "column_break_soya",
+  "section_break_adkr",
+  "item_groups",
+  "column_break_plvo",
+  "admin_users"
+ ],
+ "fields": [
+  {
+   "fieldname": "oauth_client_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Oauth client id",
+   "options": "OAuth Client",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_moxb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "waiter_role",
+   "fieldtype": "Link",
+   "label": "Waiter role",
+   "options": "Role"
+  },
+  {
+   "fieldname": "column_break_fdld",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_customer",
+   "fieldtype": "Link",
+   "label": "Default customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "section_break_dwqy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "default_payment_method",
+   "fieldtype": "Link",
+   "label": "Default payment method",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "column_break_soya",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_adkr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item_groups",
+   "fieldtype": "Table",
+   "label": "Item groups",
+   "options": "Sopos Restaurant Groups"
+  },
+  {
+   "fieldname": "section_break_cwlv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tax_account",
+   "fieldtype": "Link",
+   "label": "Tax account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "admin_users",
+   "fieldtype": "Table",
+   "label": "Admin users",
+   "options": "Admin Users"
+  },
+  {
+   "fieldname": "column_break_plvo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_htif",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "change_approval_role",
+   "fieldtype": "Link",
+   "label": "Change approval role",
+   "options": "Role"
+  },
+  {
+   "fieldname": "column_break_ejon",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qr_code_domain",
+   "fieldtype": "Data",
+   "label": "Qr code site domain"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-07-04 08:24:05.271710",
+ "modified_by": "Administrator",
+ "module": "Sopos",
+ "name": "SOPOS Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

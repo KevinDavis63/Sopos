@@ -1,0 +1,145 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ORDER-{####}",
+ "creation": "2024-03-18 02:02:48.631007",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "table",
+  "column_break_oicx",
+  "customer",
+  "column_break_tbbi",
+  "guests",
+  "column_break_wqic",
+  "waiter",
+  "section_break_dvia",
+  "status",
+  "column_break_qvky",
+  "pos_opening_entry",
+  "column_break_ybwm",
+  "pos_invoice",
+  "order_items_section",
+  "items",
+  "history_section",
+  "history"
+ ],
+ "fields": [
+  {
+   "fieldname": "table",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Table",
+   "options": "Sopos Tables"
+  },
+  {
+   "fieldname": "column_break_oicx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "column_break_tbbi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "guests",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "No of guests"
+  },
+  {
+   "fieldname": "section_break_dvia",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Ordered",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Ordered\nPaid\nCancelled\nPayLater"
+  },
+  {
+   "fieldname": "column_break_qvky",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pos_opening_entry",
+   "fieldtype": "Link",
+   "label": "Pos opening entry",
+   "options": "POS Opening Entry"
+  },
+  {
+   "fieldname": "column_break_ybwm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pos_invoice",
+   "fieldtype": "Link",
+   "label": "Pos invoice",
+   "options": "POS Invoice"
+  },
+  {
+   "fieldname": "order_items_section",
+   "fieldtype": "Section Break",
+   "label": "Order items"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "options": "Sopos Table Order Items"
+  },
+  {
+   "fieldname": "column_break_wqic",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "waiter",
+   "fieldtype": "Link",
+   "label": "Waiter",
+   "options": "User"
+  },
+  {
+   "fieldname": "history_section",
+   "fieldtype": "Section Break",
+   "label": "History"
+  },
+  {
+   "fieldname": "history",
+   "fieldtype": "Table",
+   "options": "Sopos Table Orders History"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-04 07:59:14.584513",
+ "modified_by": "Administrator",
+ "module": "Sopos",
+ "name": "Sopos Table Orders",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

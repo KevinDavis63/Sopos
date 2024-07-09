@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-18 12:22:53.511865",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "area",
+  "column_break_pfst",
+  "table",
+  "column_break_vwgi",
+  "company",
+  "column_break_havq",
+  "floor",
+  "section_break_ltnl",
+  "customer",
+  "column_break_egcd",
+  "order_no",
+  "section_break_kire",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "area",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Area",
+   "options": "Kitchen\nBar"
+  },
+  {
+   "fieldname": "column_break_pfst",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "table",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Table",
+   "options": "Sopos Tables"
+  },
+  {
+   "fieldname": "column_break_vwgi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Company"
+  },
+  {
+   "fieldname": "column_break_havq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "floor",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Floor"
+  },
+  {
+   "fieldname": "section_break_ltnl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "label": "Customer"
+  },
+  {
+   "fieldname": "column_break_egcd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "order_no",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Order no",
+   "options": "Sopos Table Orders"
+  },
+  {
+   "fieldname": "section_break_kire",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "options": "Sopos Production Order Items"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-04 08:00:43.647348",
+ "modified_by": "Administrator",
+ "module": "Sopos",
+ "name": "Sopos Production Order",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

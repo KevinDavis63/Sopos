@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-03-24 06:10:24.585216",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "user",
+  "column_break_vyld",
+  "pos_opening_entry",
+  "column_break_uxim",
+  "opening_date",
+  "section_break_nkww",
+  "closing_date",
+  "column_break_rkvh",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Data",
+   "label": "User"
+  },
+  {
+   "fieldname": "column_break_vyld",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_uxim",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "opening_date",
+   "fieldtype": "Datetime",
+   "label": "Opening date"
+  },
+  {
+   "fieldname": "section_break_nkww",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "closing_date",
+   "fieldtype": "Datetime",
+   "label": "Closing date"
+  },
+  {
+   "fieldname": "column_break_rkvh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pos_opening_entry",
+   "fieldtype": "Data",
+   "label": "Pos opening entry"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nClosed"
+  }
+ ],
+ "in_create": 1,
+ "links": [],
+ "modified": "2024-03-24 08:10:02.743479",
+ "modified_by": "Administrator",
+ "module": "Sopos",
+ "name": "Sopos Waiter Shift",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "read_only": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
