@@ -99,6 +99,8 @@ def book_table(**kwargs):
 
 @frappe.whitelist()
 def update_order(**kwargs):
+	isQrOrder = kwargs.get("isQrOrder");
+	
 	doc = frappe.get_doc("Sopos Table Orders", kwargs.get("order_no"))
 	doc.table = kwargs.get("table")
 	doc.customer = kwargs.get("customer")
@@ -149,7 +151,7 @@ def submit_order(**kwargs):
 	doc.is_pos = kwargs.get("is_pos")
 	doc.custom_pos_opening_entry = kwargs.get("opening_entry")
 	doc.update_stock = kwargs.get("update_stock")
-	doc.change_amount = kwargs.get("change_amount")
+	doc.change_amount = kwargs.get(	"change_amount")
 	doc.base_change_amount = kwargs.get("change_amount")
 
 	doc.append("taxes", {

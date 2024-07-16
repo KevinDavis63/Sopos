@@ -83,12 +83,33 @@ def tables(**kwargs):
 									"table": table.name,
 									"status": "Ordered"
 								})
+		#for order in orders:
+		#	orderItems.append(frappe.get_doc("Sopos Table Orders", order.name))
 		for order in orders:
-			orderItems.append(frappe.get_doc("Sopos Table Orders", order.name))
+			obj = frappe.get_doc("Sopos Table Orders", order.name)
+			sum = 0
+			mItemList = [];
+			for mItem in obj.items:
+				if int(mItem.quantity)!=0:
+					mItemList.append(mItem);
+					sum = sum +int(mItem.quantity)
+			obj.items = mItemList
+			if sum >0:
+				orderItems.append(obj)
+		#for order in orders:
+		#	items = frappe.get_all("Sopos Table Order Items",fields=["*"], filters=[["parent","=", order.name],["quantity","!=","0"]])
+		#	order['items']= items
+		#	orderItems.append(order)
 
 		table.orders = orderItems
-		items.append(table)
 
+		qrOrderItems = []
+		qrOrders = frappe.get_all("QR CODE ORDER", fields=["*"], filters={"table": table.name,"status":"Ordered"})
+		for qrOrder in qrOrders:
+			qrOrderItems.append(frappe.get_doc("QR CODE ORDER", qrOrder.name))
+		table.qrOrderItems = qrOrderItems
+		items.append(table)
+	
 	return {
 		"tables": items
 	}
