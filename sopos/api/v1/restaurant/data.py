@@ -90,9 +90,9 @@ def tables(**kwargs):
 			sum = 0
 			mItemList = [];
 			for mItem in obj.items:
-				if int(mItem.quantity)!=0:
+				if float(mItem.quantity)!=0:
 					mItemList.append(mItem);
-					sum = sum +int(mItem.quantity)
+					sum = sum +float(mItem.quantity)
 			obj.items = mItemList
 			if sum >0:
 				orderItems.append(obj)

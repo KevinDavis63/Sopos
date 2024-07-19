@@ -145,14 +145,22 @@ def submit_order(**kwargs):
 		return api_error("Tax account not setup")
 	doc = frappe.new_doc("POS Invoice")
 	doc.customer = kwargs.get("customer")
+	doc.waiter = kwargs.get("waiter")
 	doc.company = kwargs.get("company")
 	doc.posting_date = kwargs.get("posting_date")
 	doc.pos_profile = kwargs.get("pos_profile")
 	doc.is_pos = kwargs.get("is_pos")
 	doc.custom_pos_opening_entry = kwargs.get("opening_entry")
 	doc.update_stock = kwargs.get("update_stock")
-	doc.change_amount = kwargs.get(	"change_amount")
-	doc.base_change_amount = kwargs.get("change_amount")
+	if (kwargs.get("pay_later")):
+		doc.change_amount = "0"
+	else:
+		doc.change_amount = kwargs.get(	"change_amount")
+
+	if (kwargs.get("pay_later")):
+		doc.base_change_amount = 0
+	else:
+		doc.base_change_amount = kwargs.get("change_amount")
 
 	doc.append("taxes", {
 		"charge_type": "Actual",

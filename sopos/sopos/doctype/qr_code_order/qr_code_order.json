@@ -1,0 +1,81 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:QR ORDER-{####}",
+ "creation": "2024-07-12 13:54:47.787679",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "table",
+  "column_break_xyhd",
+  "company",
+  "column_break_nbus",
+  "status",
+  "section_break_mecw",
+  "item_ordered"
+ ],
+ "fields": [
+  {
+   "fieldname": "table",
+   "fieldtype": "Data",
+   "label": "Table"
+  },
+  {
+   "fieldname": "item_ordered",
+   "fieldtype": "Table",
+   "label": "Item Ordered",
+   "options": "Sopos Table Order Items"
+  },
+  {
+   "fieldname": "column_break_xyhd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_mecw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_nbus",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Ordered",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Ordered\nCancelled"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-07-12 15:54:47.492939",
+ "modified_by": "Administrator",
+ "module": "Sopos",
+ "name": "QR CODE ORDER",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

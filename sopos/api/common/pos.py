@@ -1,6 +1,8 @@
 import frappe
 import sopos
-
+from erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry import (
+	make_closing_entry_from_opening,
+)
 
 @frappe.whitelist()
 def open(**kwargs):
@@ -60,6 +62,28 @@ def opening_entry_details(**kwargs):
 		"modes":payment_modes,
 	}
 
+# @frappe.whitelist()
+# def close_pos(**kwargs):
+# 	opening_entry = frappe.get_doc("POS Opening Entry", kwargs.get("pos_opening_entry"))
+# 	if not opening_entry:
+# 		return sopos.api_error(message="OPening entry not found", code=500)
+# 	doc = make_closing_entry_from_opening(opening_entry)
+	
+# 	doc.set("payment_reconciliation",None)
+
+# 	for item in kwargs.get("amount"):
+# 		doc.append("payment_reconciliation", {
+# 			"mode_of_payment": item.get("mode_of_payment"),
+# 			"opening_amount": item.get("opening_amount"),
+# 			"expected_amount": item.get("expected_amount"),
+# 			"closing_amount": item.get("closing_amount"),
+# 			"difference":item.get("difference")
+# 		})
+	
+# 	doc.save(ignore_permissions=True)
+# 	doc.submit()
+# 	# frappe.delete_doc("Sopos Production Order")
+# 	return doc
 
 @frappe.whitelist()
 def close_pos(**kwargs):
