@@ -145,7 +145,7 @@ def submit_order(**kwargs):
 		return api_error("Tax account not setup")
 	doc = frappe.new_doc("POS Invoice")
 	doc.customer = kwargs.get("customer")
-	doc.waiter = kwargs.get("waiter")
+	doc.custom_waiter = kwargs.get("waiter")
 	doc.company = kwargs.get("company")
 	doc.posting_date = kwargs.get("posting_date")
 	doc.pos_profile = kwargs.get("pos_profile")
