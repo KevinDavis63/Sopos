@@ -99,33 +99,39 @@ def book_table(**kwargs):
 
 @frappe.whitelist()
 def update_order(**kwargs):
-	isQrOrder = kwargs.get("isQrOrder");
-	
-	doc = frappe.get_doc("Sopos Table Orders", kwargs.get("order_no"))
-	doc.table = kwargs.get("table")
-	doc.customer = kwargs.get("customer")
-	doc.guests = kwargs.get("guest")
-	doc.waiter = kwargs.get("waiter")
-	doc.pos_opening_entry = kwargs.get("pos_opening_entry")
-	doc.status = "Ordered"
-	doc.set("items", [])
-	doc.save()
-	for child in kwargs.get("items"):
-		doc.append("items", {
-			"item_code": child.get("item_code"),
-			"quantity": child.get("quantity"),
-			"price": child.get("price"),
-			"tax_rate": child.get("tax_rate"),
-			"uom": child.get("uom"),
-			"customer_note": child.get("customer_note"),
-			"internal_note": child.get("internal_note"),
-			"status":"Saved"
-		})
-	doc.save()
-	frappe.db.commit()
+	isQrOrder = kwargs.get("isQrOrder")
+	if isQrOrder==True:			#Add By Kevin
+		doc = book_table(**kwargs)
+		qrDoc = frappe.get_doc("QR CODE ORDER",kwargs.get("order_no"))
+		qrDoc.status="Accepted"
+		qrDoc.save()
+		frappe.db.commit()
+	else:
+		doc = frappe.get_doc("Sopos Table Orders", kwargs.get("order_no"))
+		doc.table = kwargs.get("table")
+		doc.customer = kwargs.get("customer")
+		doc.guests = kwargs.get("guest")
+		doc.waiter = kwargs.get("waiter")
+		doc.pos_opening_entry = kwargs.get("pos_opening_entry")
+		doc.status = "Ordered"
+		doc.set("items", [])
+		doc.save()
+		for child in kwargs.get("items"):
+			doc.append("items", {
+				"item_code": child.get("item_code"),
+				"quantity": child.get("quantity"),
+				"price": child.get("price"),
+				"tax_rate": child.get("tax_rate"),
+				"uom": child.get("uom"),
+				"customer_note": child.get("customer_note"),
+				"internal_note": child.get("internal_note"),
+				"status":"Saved"
+			})
+		doc.save()
+		frappe.db.commit()
 
-	kwargs["order_no"] = doc.name
-	create_production_order(**kwargs)
+		kwargs["order_no"] = doc.name
+		create_production_order(**kwargs)
 
 	return doc
 
