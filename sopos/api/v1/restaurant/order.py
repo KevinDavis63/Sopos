@@ -197,9 +197,14 @@ def submit_order(**kwargs):
 
 
 	for child in kwargs.get("payments"):
+		child_amount = 0
+		try:
+			child_amount = float(child.get("amount"))
+		except ValueError:
+			None
 		doc.append("payments", {
 			"mode_of_payment": child.get("mode_of_payment"),
-			"amount": float(child.get("amount")),
+			"amount": child_amount,
 		})
 	if (kwargs.get("pay_later")):
 		doc.status = "Overdue"
