@@ -68,7 +68,7 @@ def opening_entry_details(**kwargs):
 # 	if not opening_entry:
 # 		return sopos.api_error(message="OPening entry not found", code=500)
 # 	doc = make_closing_entry_from_opening(opening_entry)
-	
+
 # 	doc.set("payment_reconciliation",None)
 
 # 	for item in kwargs.get("amount"):
@@ -79,7 +79,7 @@ def opening_entry_details(**kwargs):
 # 			"closing_amount": item.get("closing_amount"),
 # 			"difference":item.get("difference")
 # 		})
-	
+
 # 	doc.save(ignore_permissions=True)
 # 	doc.submit()
 # 	# frappe.delete_doc("Sopos Production Order")

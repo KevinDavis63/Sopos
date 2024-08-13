@@ -149,92 +149,106 @@ def submit_order(**kwargs):
 	setting = frappe.get_doc("SOPOS Settings")
 	if not setting.tax_account:
 		return api_error("Tax account not setup")
-	doc = frappe.new_doc("POS Invoice")
-	doc.customer = kwargs.get("customer")
-	doc.custom_waiter = kwargs.get("waiter")
-	doc.company = kwargs.get("company")
-	doc.posting_date = kwargs.get("posting_date")
-	doc.pos_profile = kwargs.get("pos_profile")
-	doc.is_pos = kwargs.get("is_pos")
-	doc.custom_pos_opening_entry = kwargs.get("opening_entry")
-	doc.update_stock = kwargs.get("update_stock")
-	if (kwargs.get("pay_later")):
-		doc.change_amount = "0"
-	else:
-		doc.change_amount = kwargs.get(	"change_amount")
-
-	if (kwargs.get("pay_later")):
-		doc.base_change_amount = 0
-	else:
-		doc.base_change_amount = kwargs.get("change_amount")
-
-	doc.append("taxes", {
-		"charge_type": "Actual",
-		"description": "VAT tax",
-		"account_head": setting.tax_account,
-		"tax_amount": kwargs.get("tax_amount")
-	})
-	for child in kwargs.get("items"):
-		quantity = float(child.get("quantity"))
-		price = float(child.get("price"))
-		amount = quantity * price
-		doc.append("items", {
-			"item_code": child.get("item_code"),
-			"qty": quantity,
-			"rate": price,  # child.get("price"),
-			"base_rate": price,  # child.get("price"),
-			"amount": amount
-		})
-		existingItems = frappe.get_all("Sopos Table Order Items", filters={
-			"parent": kwargs.get("table_order_no"),
-			"item_code":child.get("item_code"),
-			"status":"Saved"
-		})
-		for item in existingItems:
-			elem = frappe.get_doc("Sopos Table Order Items",item.name)
-			elem.status = "Paid"
-			elem.save()
-
-
-	for child in kwargs.get("payments"):
-		child_amount = 0
-		try:
-			child_amount = float(child.get("amount"))
-		except ValueError:
-			None
-		doc.append("payments", {
-			"mode_of_payment": child.get("mode_of_payment"),
-			"amount": child_amount,
-		})
-	if (kwargs.get("pay_later")):
-		doc.status = "Overdue"
-		doc.outstanding_amount = kwargs.get("total_outstanding")
-	doc.save(ignore_permissions=True)
-	doc.submit()
-
-	# update table order with payment
-	order = frappe.get_doc("Sopos Table Orders", kwargs.get("table_order_no"))
-	#update order status
-
-	if (kwargs.get("pay_later")):
-		order.status = "PayLater"
-	else:
-		#check if there are items not paid yet
-		unpaid = frappe.get_all("Sopos Table Order Items", filters={
-			"parent":order.name,
-			"status":"Saved"
-		})
-		if unpaid:
-			order.status = "Ordered"
+	table_order_no=kwargs.get("table_order_no")
+	if not table_order_no:
+		return api_error("Table order no is missing")
+	frappe.db.begin()
+	try:
+		doc = frappe.new_doc("POS Invoice")
+		doc.customer = kwargs.get("customer")
+		doc.custom_waiter = kwargs.get("waiter")
+		doc.company = kwargs.get("company")
+		doc.posting_date = kwargs.get("posting_date")
+		doc.pos_profile = kwargs.get("pos_profile")
+		doc.is_pos = kwargs.get("is_pos")
+		doc.custom_pos_opening_entry = kwargs.get("opening_entry")
+		doc.update_stock = kwargs.get("update_stock")
+		if (kwargs.get("pay_later")):
+			doc.change_amount = "0"
 		else:
-			order.status = "Paid"
-			# delete the production order
-			production = frappe.get_all("Sopos Production Order",
-										filters={"order_no": kwargs.get("table_order_no")})
-			for item in production:
-				frappe.delete_doc("Sopos Production Order", item.name)
+			doc.change_amount = kwargs.get(	"change_amount")
 
-	order.save(ignore_permissions=True)
+		if (kwargs.get("pay_later")):
+			doc.base_change_amount = 0
+		else:
+			doc.base_change_amount = kwargs.get("change_amount")
+
+		doc.append("taxes", {
+			"charge_type": "Actual",
+			"description": "VAT tax",
+			"account_head": setting.tax_account,
+			"tax_amount": kwargs.get("tax_amount")
+		})
+		for child in kwargs.get("items"):
+			quantity = float(child.get("quantity"))
+			price = float(child.get("price"))
+			amount = quantity * price
+			doc.append("items", {
+				"item_code": child.get("item_code"),
+				"qty": quantity,
+				"rate": price,  # child.get("price"),
+				"base_rate": price,  # child.get("price"),
+				"amount": amount
+			})
+			existingItems = frappe.get_all("Sopos Table Order Items", filters={
+				"parent": kwargs.get("table_order_no"),
+				"item_code":child.get("item_code"),
+				"status":"Saved"
+			})
+			for item in existingItems:
+				elem = frappe.get_doc("Sopos Table Order Items",item.name)
+				elem.status = "Paid"
+				elem.save()
+
+
+		for child in kwargs.get("payments"):
+			child_amount = 0
+			try:
+				child_amount = float(child.get("amount"))
+			except ValueError:
+				None
+			doc.append("payments", {
+				"mode_of_payment": child.get("mode_of_payment"),
+				"amount": child_amount,
+			})
+		if (kwargs.get("pay_later")):
+			doc.status = "Overdue"
+			doc.outstanding_amount = kwargs.get("total_outstanding")
+			doc.paid_amount = 0
+
+		doc.save(ignore_permissions=True)
+		if (kwargs.get("pay_later")): #Add By Kevin
+			doc.paid_amount = 0
+		doc.submit()
+
+		# update table order with payment
+		order = frappe.get_doc("Sopos Table Orders", kwargs.get("table_order_no"))
+		#update order status
+
+		if (kwargs.get("pay_later")):
+			order.status = "PayLater"
+		else:
+			#check if there are items not paid yet
+			unpaid = frappe.get_all("Sopos Table Order Items", filters={
+				"parent":order.name,
+				"status":"Saved"
+			})
+			if unpaid:
+				order.status = "Ordered"
+			else:
+				order.status = "Paid"
+				# delete the production order
+				production = frappe.get_all("Sopos Production Order",
+											filters={"order_no": kwargs.get("table_order_no")})
+				for item in production:
+					frappe.delete_doc("Sopos Production Order", item.name)
+
+		order.save(ignore_permissions=True)
+	except Exception:
+		frappe.db.rollback()
+		raise
+	else:
+		frappe.db.commit()
 	return doc
 
 

@@ -18,7 +18,7 @@ def init_data():
 def items(**kwargs):
 	# items = frappe.get_all("Item", filters={"custom_isdrink": 1, "custom_isfood": 1})
 	if kwargs.get("customer"):
-		items = frappe.get_all("Item", fields=["*"])
+		items = frappe.get_all("Item", fields=["*"], filters=[{"disabled":"0"}])
 		for item in items:
 			item_price = get_price_list_rate(item.get("item_code"), "Standard Selling",
 											 kwargs.get("customer"), transaction_date)
@@ -28,7 +28,7 @@ def items(**kwargs):
 
 		}
 
-	items = frappe.get_all("Item", fields=["*"])
+	items = frappe.get_all("Item", fields=["*"], filters=[{"disabled":"0"}])
 	prices = frappe.get_all("Item Price", fields=["*"])
 	taxes = frappe.get_all("Item Tax", fields=["*"])
 	tax_template_detail = frappe.get_all("Item Tax Template Detail", fields=["*"])
@@ -88,11 +88,11 @@ def tables(**kwargs):
 		for order in orders:
 			obj = frappe.get_doc("Sopos Table Orders", order.name)
 			sum = 0
-			mItemList = [];
+			mItemList = []
 			for mItem in obj.items:
 				try:
-					if float(mItem.quantity)!=0:
-						mItemList.append(mItem);
+					if float(mItem.quantity)!=0 and mItem.status!="Paid":
+						mItemList.append(mItem)
 						sum = sum +float(mItem.quantity)
 				except ValueError:
 					None
@@ -112,7 +112,7 @@ def tables(**kwargs):
 			qrOrderItems.append(frappe.get_doc("QR CODE ORDER", qrOrder.name))
 		table.qrOrderItems = qrOrderItems
 		items.append(table)
-	
+
 	return {
 		"tables": items
 	}
