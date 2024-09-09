@@ -224,7 +224,7 @@ def submit_order(**kwargs):
 		# update table order with payment
 		order = frappe.get_doc("Sopos Table Orders", kwargs.get("table_order_no"))
 		#update order status
-
+		order.pos_invoice = doc.name
 		if (kwargs.get("pay_later")):
 			order.status = "PayLater"
 		else:
@@ -358,6 +358,29 @@ def update_quantity(**kwargs):
 			doc.quantity = kwargs.get("quantity")
 			doc.save()
 
+@frappe.whitelist()
+def update_quantity_app(**kwargs):
+	orders = frappe.get_all("Sopos Table Order Items",
+							fields=["*"],
+							filters={
+								"item_code": kwargs.get("item_code"),
+								"parent": kwargs.get("order_no")
+							})
+	for order in orders:
+		if kwargs.get("quantity") == 0:
+
+			item = frappe.get_doc("Sopos Table Order Items", order.name)
+			item.status = "Cancelled"
+			item.cancelled_by = kwargs.get("waiter")
+			item.cancel_date = frappe.utils.now()
+			item.approved_cancel_by = kwargs.get("supervisor")
+			item.save()
+
+			#frappe.delete_doc("Sopos Table Order Items", order.name)
+		else:
+			doc = frappe.get_doc("Sopos Table Order Items", order.name)
+			doc.quantity = kwargs.get("quantity")
+			doc.save()
 
 @frappe.whitelist()
 def get_price(**kwargs):

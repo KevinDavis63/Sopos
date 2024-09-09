@@ -3,6 +3,7 @@ import sopos
 from erpnext.accounts.doctype.pos_closing_entry.pos_closing_entry import (
 	make_closing_entry_from_opening,
 )
+from frappe.utils.background_jobs import enqueue
 
 @frappe.whitelist()
 def open(**kwargs):
@@ -123,5 +124,31 @@ def close_pos(**kwargs):
 		})
 	doc.save(ignore_permissions=True)
 	doc.submit()
+	email_closed_pos(doc)
 	frappe.delete_doc("Sopos Production Order")
 	return doc
+
+def email_closed_pos(closed_doc):
+	receiver = 'mmauricio@catertradebn.com'
+
+	if receiver:
+		email_args = {
+				"sender": "bluerestaurant2024@gmail.com",
+				"recipients": [receiver, "hragab@catertradebn.com" ],
+				"message": "Pos Closing Entry",
+				"subject": "Pos Closing Entry --- " + closed_doc.posting_date.strftime("%Y-%m-%d %H:%M:%S"),
+				"attachments": [
+					frappe.attach_print(closed_doc.doctype, closed_doc.name, file_name=closed_doc.name, password=None)
+				],
+				"reference_doctype": closed_doc.doctype,
+				"reference_name": closed_doc.name,
+				"now":True
+			}
+		# if not frappe.flags.in_test:
+		# 	enqueue(method=frappe.sendmail, queue="short", timeout=300, is_async=True, **email_args)
+		# else:
+		frappe.sendmail(**email_args)
+	else:
+		return False
+
+

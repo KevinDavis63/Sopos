@@ -28,3 +28,10 @@ def init_data():
 		"uoms": uoms,
 		"groups": groups,
 	}
+
+@frappe.whitelist()
+def pos_open_list():
+	open_entries=frappe.get_all("POS Opening Entry",fields=["*"],filters=[{"status":"Open"},{ "docstatus": "1" }])
+	return {
+		"open_entries": open_entries,
+	}
