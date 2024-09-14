@@ -24,6 +24,7 @@ const realtime = io.of(/^\/.*$/);
 function on_connection(socket) {
     socket.join("all");
     socket.join(user_room(socket.user));
+	realtime.emit("init","Socket init!");
 }
 
 realtime.on("connection", on_connection);
@@ -48,4 +49,4 @@ const subscriber = get_redis_subscriber();
 
 let port = conf.fsocketio_port;
 io.listen(port);
-console.log("Realtime service listening on: ", port);
+console.log("Sopos Realtime service listening on: ", port);

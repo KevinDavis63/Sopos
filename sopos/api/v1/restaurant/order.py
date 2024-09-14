@@ -382,6 +382,11 @@ def update_quantity_app(**kwargs):
 			doc.quantity = kwargs.get("quantity")
 			doc.save()
 
+	table_order = frappe.get_doc("Sopos Table Orders", kwargs.get("order_no"))
+
+	frappe.publish_realtime(event="update_quantity", message={"table":table_order.table, "customer": table_order.customer, "item_code":  kwargs.get("item_code"), "order": kwargs.get("order_no"),"quantity": kwargs.get("quantity"),"remove_quantity": kwargs.get("remove_quantity")})
+
+
 @frappe.whitelist()
 def get_price(**kwargs):
 	details = get_pricing_rule_for_item(frappe.as_json({
